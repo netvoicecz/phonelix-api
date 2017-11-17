@@ -1,80 +1,49 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://vos.phonelix.cz/px-oauth-server/
 
-# bla
+# PHONElix
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+API projektu PHONElix.
 
-## Questions Collection [/questions]
+# Group XMPP Extras
 
-### List All Questions [GET]
+Rozšíření XMPP
 
+## User collection in group [/xmpp/groups/{groupId}/users]
++ Parameters
+    + groupId: 45 (number) - group ID
+    
+### List all users of group [GET]
 + Response 200 (application/json)
 
         [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
+            "frantisek.novotny@seznam.cz",
+            "lukas.svoboda@centrum.cz"
         ]
 
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
+### Add new user to group [POST]
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
+        "jan.novak@gmail.com"
 
 + Response 201 (application/json)
+        
+## User in group [/groups/{groupId}/users/{userId}]
++ Parameters
+    + groupId: 45 (number) - group ID
+    + userId: jan.novak@gmail.com (string) - user ID
 
-    + Headers
+### Delete user from group [DELETE]
++ Response 204
 
-            Location: /questions/2
+## Group collection of user [/users/{userId}/groups]
++ Parameters
+    + userId: jan.novak@gmail.com (string) - user ID
 
-    + Body
+### List all groups of user [GET]
++ Response 200 (application/json)
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+        [
+            45,
+            68
+        ]
